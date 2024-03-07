@@ -1,5 +1,5 @@
-import AuthPage from "@/components/templates/AuthPage/AuthPage";
-import Head from "next/head";
+import AuthPage from '@/components/templates/AuthPage/AuthPage'
+import Head from 'next/head'
 
 function Auth() {
   return (
@@ -13,7 +13,7 @@ function Auth() {
       </Head>
       <AuthPage />
     </>
-  );
+  )
 }
 
 export default Auth
