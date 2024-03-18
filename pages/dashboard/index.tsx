@@ -1,4 +1,5 @@
 import Layout from '@/components/layout/Layout'
+import DashboardPage from '@/components/templates/DashboardPage/DashboardPage'
 import Head from 'next/head'
 
 function Dashboard() {
@@ -13,7 +14,7 @@ function Dashboard() {
       </Head>
       <Layout>
         <main>
-          <h1>Dashboard</h1>
+          <DashboardPage />
           <div className="overlay" />
         </main>
       </Layout>
