@@ -10,7 +10,7 @@ import CartPopup from './CartPopup/CartPopup'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
 
 const HeaderBottom = () => {
-  const isMedia950 = useMediaQuery
+  const isMedia950 = useMediaQuery(950)
   const mode = useStore($mode)
   const darkModeClass = mode === 'dark' ? `${styles.dark_mode}` : ''
 
