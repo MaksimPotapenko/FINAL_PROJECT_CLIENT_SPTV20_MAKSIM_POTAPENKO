@@ -1,5 +1,5 @@
 import Layout from '@/components/layout/Layout'
-import DashboardPage from '@/components/templates/DashboardPage/DashboardPage'
+import CatalogPage from '@/components/templates/CatalogPage/CatalogPage'
 import useRedirectByUserCheck from '@/hooks/useRedirectByUserCheck'
 import Head from 'next/head'
 
@@ -17,7 +17,7 @@ function Catalog() {
       {shouldLoadContent && (
         <Layout>
           <main>
-            <h1>Catalog</h1>
+            <CatalogPage />
             <div className="overlay" />
           </main>
         </Layout>

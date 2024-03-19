@@ -1,4 +1,4 @@
-import { getBestsellersOrNewSetsFx } from '@/app/api/legosets'
+import { getBestsellersOrNewSetsFx } from '@/app/api/legoSets'
 import BrandsSlider from '@/components/modules/DashboardPage/BrandsSlider'
 import CartAlert from '@/components/modules/DashboardPage/CartAlert'
 import DashboardSlider from '@/components/modules/DashboardPage/DashboardSlider'
