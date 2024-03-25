@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import skeletonStyles from '@/styles/skeleton/index.module.scss'
 import CatalogItem from '@/components/modules/CatalogPage/CatalogItem'
+import ReactPaginate from 'react-paginate'
 
 const CatalogPage = () => {
   const mode = useStore($mode)

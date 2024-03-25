@@ -84,7 +84,7 @@ const DashboardSlider = ({ items, spinner, goToSetPage }: IDashboardSlider) => {
                 Артикул: {item.vendor_code}
               </span>
               <span className={styles.dashboard__slide__price}>
-                {formatPrice(item.price)} P
+                {formatPrice(item.price)} €
               </span>
             </div>
           </div>
