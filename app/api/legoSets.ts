@@ -6,3 +6,9 @@ export const getBestsellersOrNewSetsFx = createEffect(async (url: string) => {
 
   return data
 })
+
+export const getLegoSetsFx = createEffect(async (url: string) => {
+  const { data } = await api.get(url)
+
+  return data
+})

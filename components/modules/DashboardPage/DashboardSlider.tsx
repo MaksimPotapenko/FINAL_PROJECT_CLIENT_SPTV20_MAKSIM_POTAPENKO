@@ -51,10 +51,10 @@ const DashboardSlider = ({ items, spinner, goToSetPage }: IDashboardSlider) => {
   return (
     <Slider {...settings} className={styles.dashboard__slider}>
       {spinner ? (
-        [...Array(8)].map((item) => (
+        [...Array(8)].map((_, i) => (
           <div
             className={`${skeletonStyles.skeleton__item} ${mode === 'dark' ? `${skeletonStyles.dark_mode}` : ''}`}
-            key={item}
+            key={i}
             style={width}
           >
             <div className={skeletonStyles.skeleton__item__light} />
@@ -84,7 +84,7 @@ const DashboardSlider = ({ items, spinner, goToSetPage }: IDashboardSlider) => {
                 Артикул: {item.vendor_code}
               </span>
               <span className={styles.dashboard__slide__price}>
-                {formatPrice(item.price)} P
+                {formatPrice(item.price)} €
               </span>
             </div>
           </div>

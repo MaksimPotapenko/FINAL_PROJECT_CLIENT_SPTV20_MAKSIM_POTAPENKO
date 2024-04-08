@@ -76,16 +76,6 @@ const HeaderTop = () => {
                 </a>
               </Link>
             </li>
-            <li className={styles.header__nav__list__item}>
-              <Link href="/providers" passHref legacyBehavior>
-                <a
-                  className={`${styles.header__nav__list__item__link} ${darkModeClass}`}
-                  onClick={closePopup}
-                >
-                  Поставщикам
-                </a>
-              </Link>
-            </li>
             {isMedia950 && (
               <li className={styles.header__nav__list__item}>
                 <CityButton />
