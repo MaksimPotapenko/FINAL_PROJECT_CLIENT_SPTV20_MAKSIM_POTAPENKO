@@ -2,17 +2,22 @@ import { $mode } from '@/context/mode'
 import { useStore } from 'effector-react'
 import styles from '@/styles/catalog/index.module.scss'
 import { Range, getTrackBackground } from 'react-range'
+import { IPriceRangeProps } from '@/types/catalog'
 
 const STEP = 0.1
 const MIN = 0
 const MAX = 1000
 
-const PriceRange = () => {
+const PriceRange = ({
+  priceRange,
+  setPriceRange,
+  setIsPriceRangeChanged,
+}: IPriceRangeProps) => {
   const mode = useStore($mode)
   const darkModeClass = mode === 'dark' ? `${styles.dark_mode}` : ''
 
   const handlePriceRangeChange = (values: number[]) => {
-    setPriceChange
+    setIsPriceRangeChanged(true)
     setPriceRange(values)
   }
 
@@ -22,32 +27,33 @@ const PriceRange = () => {
         <input
           type="text"
           value={Math.ceil(priceRange[0])}
-          placeholder="от 00 000"
+          placeholder="от 0"
           readOnly
         />
         <span className={styles.filters__price__inputs__border} />
         <input
           type="text"
           value={Math.ceil(priceRange[1])}
-          placeholder="до 10 000"
+          placeholder="до 1000"
           readOnly
         />
       </div>
       <Range
-        values={this.state.values}
+        values={priceRange}
         step={STEP}
         min={MIN}
         max={MAX}
-        onChange={(values) => this.setState({ values })}
+        onChange={handlePriceRangeChange}
         renderTrack={({ props, children }) => (
           <div
             onMouseDown={props.onMouseDown}
             onTouchStart={props.onTouchStart}
             style={{
               ...props.style,
-              height: '36px',
+              height: 'auto',
               display: 'flex',
               width: '100%',
+              padding: '0 10px',
             }}
           >
             <div
@@ -57,8 +63,8 @@ const PriceRange = () => {
                 width: '100%',
                 borderRadius: '4px',
                 background: getTrackBackground({
-                  values: this.state.values,
-                  colors: ['#548BF4', '#ccc'],
+                  values: priceRange,
+                  colors: ['#B1CEFA', '#247CC8', '#B1CEFA'],
                   min: MIN,
                   max: MAX,
                 }),
@@ -69,34 +75,26 @@ const PriceRange = () => {
             </div>
           </div>
         )}
-        renderThumb={({ props, isDragged }) => (
+        renderThumb={({ props }) => (
           <div
             {...props}
             style={{
               ...props.style,
-              height: '42px',
-              width: '42px',
-              borderRadius: '4px',
-              backgroundColor: '#FFF',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              boxShadow: '0px 2px 6px #AAA',
             }}
           >
             <div
               style={{
-                height: '16px',
-                width: '5px',
-                backgroundColor: isDragged ? '#548BF4' : '#CCC',
+                height: '20px',
+                width: '20px',
+                borderRadius: '50%',
+                background: '#FFFFFF',
+                border: '3px solid #1C629E',
+                boxShadow: '0px 12px 8px -6px rgba(174, 181, 239, 0.2)',
               }}
             />
           </div>
         )}
       />
-      <output style={{ marginTop: '30px' }} id="output">
-        {this.state.values[0].toFixed(1)}
-      </output>
     </div>
   )
 }

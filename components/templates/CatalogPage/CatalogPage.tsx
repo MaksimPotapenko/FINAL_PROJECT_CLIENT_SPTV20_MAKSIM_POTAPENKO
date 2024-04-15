@@ -1,7 +1,13 @@
 import { getLegoSetsFx } from '@/app/api/legoSets'
 import FilterSelect from '@/components/modules/CatalogPage/FilterSelect'
 import ThemesBlock from '@/components/modules/CatalogPage/ThemesBlock'
-import { $legoSets, setLegoSets } from '@/context/legoSets'
+import {
+  $legoSets,
+  $legoThemes,
+  setLegoSets,
+  setLegoSetsThemes,
+  updateLegoSetsThemes,
+} from '@/context/legoSets'
 import { $mode } from '@/context/mode'
 import styles from '@/styles/catalog/index.module.scss'
 import { useStore } from 'effector-react'
@@ -18,9 +24,11 @@ import CatalogFilters from '@/components/modules/CatalogPage/CatalogFilters'
 
 const CatalogPage = ({ query }: { query: IQueryParams }) => {
   const mode = useStore($mode)
+  const legoThemes = useStore($legoThemes)
   const legoSets = useStore($legoSets)
   const [spinner, setSpinner] = useState(false)
-  const [priceRange, setPriceRange] = useState([50, 200])
+  const [priceRange, setPriceRange] = useState([0, 1000])
+  const [isPriceRangeChanged, setIsPriceRangeChanged] = useState(false)
   const pagesCount = Math.ceil(legoSets.count / 20)
   const isValidOffset =
     query.offset && !isNaN(+query.offset) && +query.offset > 0
@@ -29,6 +37,8 @@ const CatalogPage = ({ query }: { query: IQueryParams }) => {
   )
   const darkModeClass = mode === 'dark' ? `${styles.dark_mode}` : ''
   const router = useRouter()
+  const isAnyLegoThemeChecked = legoThemes.some((item) => item.checked)
+  const resetFilterBtnDisabled = !(isPriceRangeChanged || isAnyLegoThemeChecked)
 
   useEffect(() => {
     loadLegoSets()
@@ -122,6 +132,20 @@ const CatalogPage = ({ query }: { query: IQueryParams }) => {
     } catch (error) {}
   }
 
+  const resetFilters = async () => {
+    try {
+      const data = await getLegoSetsFx(`/lego-sets?limit=20&offset=0`)
+
+      setLegoSetsThemes(legoThemes.map((item) => ({ ...item, checked: false })))
+
+      setLegoSets(data)
+      setPriceRange([0, 1000])
+      setIsPriceRangeChanged(false)
+    } catch (error) {
+      toast.error((error as Error).message)
+    }
+  }
+
   return (
     <section className={styles.catalog}>
       <div className={`container ${styles.catalog__container}`}>
@@ -130,14 +154,19 @@ const CatalogPage = ({ query }: { query: IQueryParams }) => {
         </h2>
         <div className={`${styles.catalog__top} ${darkModeClass}`}>
           <AnimatePresence>
-            <ThemesBlock title="Темы наборов:" />
+            {isAnyLegoThemeChecked && (
+              <ThemesBlock
+                title="Темы наборов:"
+                event={updateLegoSetsThemes}
+                themesList={legoThemes}
+              />
+            )}
           </AnimatePresence>
-        </div>
-        <div className={`${styles.catalog__bottom} ${darkModeClass}`}>
           <div className={styles.catalog__top__inner}>
             <button
               className={`${styles.catalog__top__reset} ${darkModeClass}`}
-              disabled={true}
+              disabled={resetFilterBtnDisabled}
+              onClick={resetFilters}
             >
               Сбросить фильтр
             </button>
@@ -146,7 +175,13 @@ const CatalogPage = ({ query }: { query: IQueryParams }) => {
         </div>
         <div className={styles.catalog__bottom}>
           <div className={styles.catalog__bottom__inner}>
-            <CatalogFilters />
+            <CatalogFilters
+              priceRange={priceRange}
+              setPriceRange={setPriceRange}
+              setIsPriceRangeChanged={setIsPriceRangeChanged}
+              resetFilterBtnDisabled={resetFilterBtnDisabled}
+              resetFilters={resetFilters}
+            />
             {spinner ? (
               <ul className={skeletonStyles.skeleton}>
                 {Array.from(new Array(8)).map((_, i) => (
