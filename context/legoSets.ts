@@ -1,13 +1,33 @@
+import { IFilterCheckboxItem } from '@/types/catalog'
 import { ILegoSets } from '@/types/legosets'
 import { createDomain } from 'effector'
+import { legoThemes } from '@/utils/catalog'
 
 const legoSets = createDomain()
 
 export const setLegoSets = legoSets.createEvent<ILegoSets>()
 
-export const setLegoSetsCheapFirst = legoSets.createEvent<ILegoSets>()
-export const setLegoSetsExpensiveFirst = legoSets.createEvent<ILegoSets>()
-export const setLegoSetsByPopularity = legoSets.createEvent<ILegoSets>()
+export const setLegoSetsCheapFirst = legoSets.createEvent()
+export const setLegoSetsExpensiveFirst = legoSets.createEvent()
+export const setLegoSetsByPopularity = legoSets.createEvent()
+export const setLegoSetsThemes = legoSets.createEvent<IFilterCheckboxItem[]>()
+export const updateLegoSetsThemes = legoSets.createEvent<IFilterCheckboxItem>()
+
+const updateTheme = (
+  themes: IFilterCheckboxItem[],
+  id: string,
+  payload: Partial<IFilterCheckboxItem>
+) =>
+  themes.map((item) => {
+    if (item.id === id) {
+      return {
+        ...item,
+        ...payload,
+      }
+    }
+
+    return item
+  })
 
 export const $legoSets = legoSets
   .createStore<ILegoSets>({} as ILegoSets)
@@ -24,3 +44,12 @@ export const $legoSets = legoSets
     ...state,
     rows: state.rows.sort((a, b) => b.popularity - a.popularity),
   }))
+
+export const $legoThemes = legoSets
+  .createStore<IFilterCheckboxItem[]>(legoThemes as IFilterCheckboxItem[])
+  .on(setLegoSetsThemes, (_, sets) => sets)
+  .on(updateLegoSetsThemes, (state, payload) => [
+    ...updateTheme(state, payload.id as string, {
+      checked: payload.checked,
+    }),
+  ])

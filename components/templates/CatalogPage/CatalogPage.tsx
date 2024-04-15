@@ -14,11 +14,13 @@ import ReactPaginate from 'react-paginate'
 import { IQueryParams } from '@/types/catalog'
 import { useRouter } from 'next/router'
 import { ILegoSets } from '@/types/legosets'
+import CatalogFilters from '@/components/modules/CatalogPage/CatalogFilters'
 
 const CatalogPage = ({ query }: { query: IQueryParams }) => {
   const mode = useStore($mode)
   const legoSets = useStore($legoSets)
   const [spinner, setSpinner] = useState(false)
+  const [priceRange, setPriceRange] = useState([50, 200])
   const pagesCount = Math.ceil(legoSets.count / 20)
   const isValidOffset =
     query.offset && !isNaN(+query.offset) && +query.offset > 0
@@ -144,7 +146,7 @@ const CatalogPage = ({ query }: { query: IQueryParams }) => {
         </div>
         <div className={styles.catalog__bottom}>
           <div className={styles.catalog__bottom__inner}>
-            <div className="">Filters</div>
+            <CatalogFilters />
             {spinner ? (
               <ul className={skeletonStyles.skeleton}>
                 {Array.from(new Array(8)).map((_, i) => (
