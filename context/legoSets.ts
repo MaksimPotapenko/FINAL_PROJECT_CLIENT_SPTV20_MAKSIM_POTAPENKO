@@ -11,6 +11,7 @@ export const setLegoSetsCheapFirst = legoSets.createEvent()
 export const setLegoSetsExpensiveFirst = legoSets.createEvent()
 export const setLegoSetsByPopularity = legoSets.createEvent()
 export const setLegoSetsThemes = legoSets.createEvent<IFilterCheckboxItem[]>()
+export const setFilteredLegoSets = legoSets.createEvent()
 export const updateLegoSetsThemes = legoSets.createEvent<IFilterCheckboxItem>()
 
 const updateTheme = (
@@ -53,3 +54,7 @@ export const $legoThemes = legoSets
       checked: payload.checked,
     }),
   ])
+
+export const $filteredLegoThemes = legoSets
+  .createStore<ILegoSets>({} as ILegoSets)
+  .on(setFilteredLegoSets, (_, sets) => sets)

@@ -2,6 +2,7 @@ import { getLegoSetsFx } from '@/app/api/legoSets'
 import FilterSelect from '@/components/modules/CatalogPage/FilterSelect'
 import ThemesBlock from '@/components/modules/CatalogPage/ThemesBlock'
 import {
+  $filteredLegoThemes,
   $legoSets,
   $legoThemes,
   setLegoSets,
@@ -26,8 +27,10 @@ const CatalogPage = ({ query }: { query: IQueryParams }) => {
   const mode = useStore($mode)
   const legoThemes = useStore($legoThemes)
   const legoSets = useStore($legoSets)
+  const filteredLegoSets = useStore($filteredLegoThemes)
   const [spinner, setSpinner] = useState(false)
   const [priceRange, setPriceRange] = useState([0, 1000])
+  const [isFilterInQuery, setIsFilterQuery] = useState(false)
   const [isPriceRangeChanged, setIsPriceRangeChanged] = useState(false)
   const pagesCount = Math.ceil(legoSets.count / 20)
   const isValidOffset =
@@ -42,7 +45,7 @@ const CatalogPage = ({ query }: { query: IQueryParams }) => {
 
   useEffect(() => {
     loadLegoSets()
-  }, [])
+  }, [filteredLegoSets, isFilterInQuery])
 
   console.log(legoSets.rows)
 
@@ -76,16 +79,22 @@ const CatalogPage = ({ query }: { query: IQueryParams }) => {
           )
 
           setCurrentPage(0)
-          setLegoSets(data)
+          setLegoSets(isFilterInQuery ? filteredLegoSets : data)
           return
         }
+
+        const offset = +query.offset - 1
+        const result = await getLegoSetsFx(
+          `/lego-sets?limit=20&offset=${offset}`
+        )
+
+        setCurrentPage(offset)
+        setLegoSets(isFilterInQuery ? filteredLegoSets : result)
+        return
       }
 
-      const offset = +query.offset - 1
-      const result = await getLegoSetsFx(`/lego-sets?limit=20&offset=${offset}`)
-
-      setCurrentPage(offset)
-      setLegoSets(result)
+      setCurrentPage(0)
+      setLegoSets(isFilterInQuery ? filteredLegoSets : data)
     } catch (error) {
       toast.error((error as Error).message)
     } finally {
@@ -181,6 +190,9 @@ const CatalogPage = ({ query }: { query: IQueryParams }) => {
               setIsPriceRangeChanged={setIsPriceRangeChanged}
               resetFilterBtnDisabled={resetFilterBtnDisabled}
               resetFilters={resetFilters}
+              isPriceRangeChanged={isPriceRangeChanged}
+              currentPage={currentPage}
+              setIsFilterQuery={setIsFilterQuery}
             />
             {spinner ? (
               <ul className={skeletonStyles.skeleton}>

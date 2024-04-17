@@ -19,6 +19,7 @@ const CatalogFiltersDesktop = ({
   resetFilterBtnDisabled,
   spinner,
   resetFilters,
+  applyFilters,
 }: ICatalogFilterDesktopProps) => {
   const mode = useStore($mode)
   const legoThemes = useStore($legoThemes)
@@ -58,6 +59,7 @@ const CatalogFiltersDesktop = ({
         <button
           className={styles.filters__actions__show}
           disabled={spinner || resetFilterBtnDisabled}
+          onClick={applyFilters}
         >
           {spinner ? (
             <span
