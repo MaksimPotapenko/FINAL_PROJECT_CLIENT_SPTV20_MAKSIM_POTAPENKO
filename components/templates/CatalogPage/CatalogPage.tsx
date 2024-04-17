@@ -152,6 +152,14 @@ const CatalogPage = ({ query }: { query: IQueryParams }) => {
   const resetFilters = async () => {
     try {
       const data = await getLegoSetsFx(`/lego-sets?limit=20&offset=0`)
+      const params = router.query
+
+      delete params.lego
+      delete params.priceFrom
+      delete params.priceTo
+      params.first = 'cheap'
+
+      router.push({ query: { ...params } }, undefined, { shallow: true })
 
       setLegoSetsThemes(legoThemes.map((item) => ({ ...item, checked: false })))
 
