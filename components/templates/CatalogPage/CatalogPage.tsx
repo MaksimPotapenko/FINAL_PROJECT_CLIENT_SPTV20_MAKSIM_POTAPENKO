@@ -112,17 +112,25 @@ const CatalogPage = ({ query }: { query: IQueryParams }) => {
       const data = await getLegoSetsFx(`/lego-sets?limit=20&offset=0`)
 
       if (selected > pagesCount) {
-        resetPagination(data)
+        resetPagination(isFilterInQuery ? filteredLegoSets : data)
         return
       }
 
       if (isValidOffset && +query.offset > Math.ceil(data.count / 2)) {
-        resetPagination(data)
+        resetPagination(isFilterInQuery ? filteredLegoSets : data)
         return
       }
 
       const result = await getLegoSetsFx(
-        `/lego-sets?limit=20&offset=${selected}`
+        `/lego-sets?limit=20&offset=${selected}${
+          isFilterInQuery && router.query.lego
+            ? `&lego=${router.query.lego}`
+            : ''
+        }${
+          isFilterInQuery && router.query.priceFrom && router.query.priceTo
+            ? `&priceFrom=${router.query.priceFrom}&priceTo=${router.query.priceTo}`
+            : ''
+        }`
       )
 
       router.push(
