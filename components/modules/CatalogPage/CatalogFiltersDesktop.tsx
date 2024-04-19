@@ -52,6 +52,7 @@ const CatalogFiltersDesktop = ({
               setPriceRange={setPriceRange}
               setIsPriceRangeChanged={setIsPriceRangeChanged}
             />
+            <div style={{ height: 24 }} />
           </div>
         </Accordion>
       </div>

@@ -524,7 +524,7 @@
           position: relative;
           margin: 0;
           height: 40px;
-          width: 80px;
+          width: 100px;
           background-color: #1C629E;
           border-radius: 4px;
           margin-bottom: 24px;
@@ -538,7 +538,7 @@
 
         &__reset {
           height: 40px;
-          width: 80px;
+          width: 100px;
           color: #1C629E;
           background-color: #EBF5FD;
           border: 1px solid #1C629E;
@@ -556,6 +556,7 @@
         border-radius: 0;
         grid-column: auto;
         width: 320px;
+        height: 700px;
         left: -100vw;
         position: absolute;
         top: 0;

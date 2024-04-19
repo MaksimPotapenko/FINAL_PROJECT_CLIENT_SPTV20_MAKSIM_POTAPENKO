@@ -22,6 +22,9 @@ import { IQueryParams } from '@/types/catalog'
 import { useRouter } from 'next/router'
 import { ILegoSets } from '@/types/legosets'
 import CatalogFilters from '@/components/modules/CatalogPage/CatalogFilters'
+import { usePopup } from '@/hooks/usePopup'
+import { checkQueryParams } from '@/utils/catalog'
+import FilterSvg from '@/components/elements/FilterSvg/FilterSvg'
 
 const CatalogPage = ({ query }: { query: IQueryParams }) => {
   const mode = useStore($mode)
@@ -42,6 +45,8 @@ const CatalogPage = ({ query }: { query: IQueryParams }) => {
   const router = useRouter()
   const isAnyLegoThemeChecked = legoThemes.some((item) => item.checked)
   const resetFilterBtnDisabled = !(isPriceRangeChanged || isAnyLegoThemeChecked)
+
+  const { toggleOpen, open, closePopup } = usePopup()
 
   useEffect(() => {
     loadLegoSets()
@@ -122,13 +127,15 @@ const CatalogPage = ({ query }: { query: IQueryParams }) => {
         return
       }
 
+      const { isValidLegoQuery, isValidPriceQuery } = checkQueryParams(router)
+
       const result = await getLegoSetsFx(
         `/lego-sets?limit=20&offset=${selected}${
-          isFilterInQuery && router.query.lego
+          isFilterInQuery && isValidLegoQuery
             ? `&lego=${router.query.lego}`
             : ''
         }${
-          isFilterInQuery && router.query.priceFrom && router.query.priceTo
+          isFilterInQuery && isValidPriceQuery
             ? `&priceFrom=${router.query.priceFrom}&priceTo=${router.query.priceTo}`
             : ''
         }`
@@ -200,6 +207,17 @@ const CatalogPage = ({ query }: { query: IQueryParams }) => {
             >
               Сбросить фильтр
             </button>
+            <button
+              className={styles.catalog__top__mobile_btn}
+              onClick={toggleOpen}
+            >
+              <span className={styles.catalog__top__mobile_btn__svg}>
+                <FilterSvg />
+              </span>
+              <span className={styles.catalog__top__mobile_btn__text}>
+                Фильтр
+              </span>
+            </button>
             <FilterSelect setSpinner={setSpinner} />
           </div>
         </div>
@@ -214,6 +232,8 @@ const CatalogPage = ({ query }: { query: IQueryParams }) => {
               isPriceRangeChanged={isPriceRangeChanged}
               currentPage={currentPage}
               setIsFilterQuery={setIsFilterQuery}
+              closePopup={closePopup}
+              filtersMobileOpen={open}
             />
             {spinner ? (
               <ul className={skeletonStyles.skeleton}>

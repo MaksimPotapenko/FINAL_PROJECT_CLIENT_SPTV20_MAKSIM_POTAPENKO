@@ -4,14 +4,15 @@ import { ICatalogFiltersProps } from '@/types/catalog'
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import { useStore } from 'effector-react'
-import {
-  $legoThemes,
-  setFilteredLegoSets,
-  setLegoThemesFromQuery,
-} from '@/context/legoSets'
+import { $legoThemes, setLegoThemesFromQuery } from '@/context/legoSets'
 import { useRouter } from 'next/router'
-import { getLegoSetsFx } from '@/app/api/legoSets'
 import { getQueryParamOnFirstRender } from '@/utils/common'
+import CatalogFiltersMobile from './CatalogFiltersMobile'
+import {
+  UpdateParamsAndFilters,
+  checkQueryParams,
+  updateParamsAndFiltersFromQuery,
+} from '@/utils/catalog'
 
 const CatalogFilters = ({
   priceRange,
@@ -22,6 +23,8 @@ const CatalogFilters = ({
   isPriceRangeChanged,
   currentPage,
   setIsFilterQuery,
+  closePopup,
+  filtersMobileOpen,
 }: ICatalogFiltersProps) => {
   const isMobile = useMediaQuery(820)
   const [spinner, setSpinner] = useState(false)
@@ -34,21 +37,18 @@ const CatalogFilters = ({
 
   const applyFiltersFromQuery = async () => {
     try {
-      const priceFromQueryValue = getQueryParamOnFirstRender(
-        'priceFrom',
-        router
-      )
-      const priceToQueryValue = getQueryParamOnFirstRender('priceTo', router)
-      const legoQueryValue = JSON.parse(
-        decodeURIComponent(getQueryParamOnFirstRender('lego', router) as string)
-      )
-      const isValidLegoQuery =
-        Array.isArray(legoQueryValue) && !!legoQueryValue?.length
+      const {
+        isValidLegoQuery,
+        isValidPriceQuery,
+        priceFromQueryValue,
+        priceToQueryValue,
+        legoQueryValue,
+      } = checkQueryParams(router)
 
       const legoQuery = `&lego=${getQueryParamOnFirstRender('lego', router)}`
       const priceQuery = `&priceFrom=${priceFromQueryValue}&priceTo=${priceToQueryValue}`
 
-      if (isValidLegoQuery && priceFromQueryValue && priceToQueryValue) {
+      if (isValidLegoQuery && isValidPriceQuery) {
         setIsFilterQuery(true)
         setPriceRange([+priceFromQueryValue, +priceToQueryValue])
         setIsPriceRangeChanged(true)
@@ -61,7 +61,7 @@ const CatalogFilters = ({
         return
       }
 
-      if (priceFromQueryValue && priceToQueryValue) {
+      if (isValidPriceQuery) {
         updateParamsAndFiltersFromQuery(() => {
           updatePriceFromQuery(+priceFromQueryValue, +priceToQueryValue)
         }, `${currentPage}${priceQuery}`)
@@ -75,7 +75,14 @@ const CatalogFilters = ({
         return
       }
     } catch (error) {
-      toast.error((error as Error).message)
+      const err = error as Error
+
+      if (err.message === 'URI malformed') {
+        toast.warning('Неправильный url для фильтров')
+        return
+      }
+
+      toast.error(err.message)
     }
   }
 
@@ -83,40 +90,6 @@ const CatalogFilters = ({
     setIsFilterQuery(true)
     setPriceRange([+priceFrom, +priceTo])
     setIsPriceRangeChanged(true)
-  }
-
-  const updateParamsAndFiltersFromQuery = async (
-    callback: VoidFunction,
-    path: string
-  ) => {
-    callback()
-
-    const data = await getLegoSetsFx(`/lego-sets?limit=20&offset=${path}`)
-
-    setFilteredLegoSets(data)
-  }
-
-  async function UpdateParamsAndFilters<T>(updatedParams: T, path: string) {
-    const params = router.query
-
-    delete params.lego
-    delete params.priceFrom
-    delete params.priceTo
-
-    router.push(
-      {
-        query: {
-          ...params,
-          ...updatedParams,
-        },
-      },
-      undefined,
-      { shallow: true }
-    )
-
-    const data = await getLegoSetsFx(`/lego-sets?limit=20&offset=${path}`)
-
-    setFilteredLegoSets(data)
   }
 
   const applyFilters = async () => {
@@ -143,7 +116,8 @@ const CatalogFilters = ({
             priceTo,
             offset: initialPage + 1,
           },
-          `${initialPage}${priceQuery}${legoQuery}`
+          `${initialPage}${priceQuery}${legoQuery}`,
+          router
         )
         return
       }
@@ -155,7 +129,8 @@ const CatalogFilters = ({
             priceTo,
             offset: initialPage + 1,
           },
-          `${initialPage}${priceQuery}`
+          `${initialPage}${priceQuery}`,
+          router
         )
       }
 
@@ -165,7 +140,8 @@ const CatalogFilters = ({
             lego: encodedLegoQuery,
             offset: initialPage + 1,
           },
-          `${initialPage}${legoQuery}`
+          `${initialPage}${legoQuery}`,
+          router
         )
       }
     } catch (error) {
@@ -178,7 +154,17 @@ const CatalogFilters = ({
   return (
     <>
       {isMobile ? (
-        <div />
+        <CatalogFiltersMobile
+          closePopup={closePopup}
+          spinner={spinner}
+          applyFilters={applyFilters}
+          priceRange={priceRange}
+          setIsPriceRangeChanged={setIsPriceRangeChanged}
+          setPriceRange={setPriceRange}
+          resetFilterBtnDisabled={resetFilterBtnDisabled}
+          resetFilters={resetFilters}
+          filtersMobileOpen={filtersMobileOpen}
+        />
       ) : (
         <CatalogFiltersDesktop
           priceRange={priceRange}
