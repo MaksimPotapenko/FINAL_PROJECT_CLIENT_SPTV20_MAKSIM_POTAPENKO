@@ -11,8 +11,9 @@ export const setLegoSetsCheapFirst = legoSets.createEvent()
 export const setLegoSetsExpensiveFirst = legoSets.createEvent()
 export const setLegoSetsByPopularity = legoSets.createEvent()
 export const setLegoSetsThemes = legoSets.createEvent<IFilterCheckboxItem[]>()
-export const setFilteredLegoSets = legoSets.createEvent()
 export const updateLegoSetsThemes = legoSets.createEvent<IFilterCheckboxItem>()
+export const setFilteredLegoSets = legoSets.createEvent()
+export const setLegoThemesFromQuery = legoSets.createEvent<string[]>()
 
 const updateTheme = (
   themes: IFilterCheckboxItem[],
@@ -24,6 +25,21 @@ const updateTheme = (
       return {
         ...item,
         ...payload,
+      }
+    }
+
+    return item
+  })
+
+const updateThemeFromQuery = (
+  themes: IFilterCheckboxItem[],
+  themesFromQuery: string[]
+) =>
+  themes.map((item) => {
+    if (themesFromQuery.find((title) => title === item.title)) {
+      return {
+        ...item,
+        checked: true,
       }
     }
 
@@ -53,6 +69,9 @@ export const $legoThemes = legoSets
     ...updateTheme(state, payload.id as string, {
       checked: payload.checked,
     }),
+  ])
+  .on(setLegoThemesFromQuery, (state, themesFromQuery) => [
+    ...updateThemeFromQuery(state, themesFromQuery),
   ])
 
 export const $filteredLegoThemes = legoSets

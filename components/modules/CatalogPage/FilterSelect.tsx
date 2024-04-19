@@ -20,7 +20,11 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import Select from 'react-select'
 
-const FilterSelect = () => {
+const FilterSelect = ({
+  setSpinner,
+}: {
+  setSpinner: (arg0: boolean) => void
+}) => {
   const mode = useStore($mode)
   const legoSets = useStore($legoSets)
   const [categoryOption, setCategoryOption] = useState<SelectOptionType>(null)
@@ -65,6 +69,7 @@ const FilterSelect = () => {
     )
 
   const handleSortOptionChange = (selectedOption: SelectOptionType) => {
+    setSpinner(true)
     setCategoryOption(selectedOption)
 
     switch ((selectedOption as IOption).value) {
@@ -81,6 +86,8 @@ const FilterSelect = () => {
         updateRoteParam('popular')
         break
     }
+
+    setTimeout(() => setSpinner(false), 1000)
   }
 
   return (

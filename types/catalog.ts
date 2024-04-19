@@ -61,3 +61,7 @@ export interface ICatalogFilterDesktopProps {
   applyFilters: VoidFunction
   resetFilters: VoidFunction
 }
+
+export interface ICatalogFilterMobileProps {
+  
+}

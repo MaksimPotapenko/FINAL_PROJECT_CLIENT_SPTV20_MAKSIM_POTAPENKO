@@ -1,12 +1,17 @@
 import { useMediaQuery } from '@/hooks/useMediaQuery'
 import CatalogFiltersDesktop from './CatalogFiltersDesktop'
 import { ICatalogFiltersProps } from '@/types/catalog'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import { useStore } from 'effector-react'
-import { $legoThemes, setFilteredLegoSets } from '@/context/legoSets'
+import {
+  $legoThemes,
+  setFilteredLegoSets,
+  setLegoThemesFromQuery,
+} from '@/context/legoSets'
 import { useRouter } from 'next/router'
 import { getLegoSetsFx } from '@/app/api/legoSets'
+import { getQueryParamOnFirstRender } from '@/utils/common'
 
 const CatalogFilters = ({
   priceRange,
@@ -22,6 +27,97 @@ const CatalogFilters = ({
   const [spinner, setSpinner] = useState(false)
   const legoThemes = useStore($legoThemes)
   const router = useRouter()
+
+  useEffect(() => {
+    applyFiltersFromQuery()
+  }, [])
+
+  const applyFiltersFromQuery = async () => {
+    try {
+      const priceFromQueryValue = getQueryParamOnFirstRender(
+        'priceFrom',
+        router
+      )
+      const priceToQueryValue = getQueryParamOnFirstRender('priceTo', router)
+      const legoQueryValue = JSON.parse(
+        decodeURIComponent(getQueryParamOnFirstRender('lego', router) as string)
+      )
+      const isValidLegoQuery =
+        Array.isArray(legoQueryValue) && !!legoQueryValue?.length
+
+      const legoQuery = `&lego=${getQueryParamOnFirstRender('lego', router)}`
+      const priceQuery = `&priceFrom=${priceFromQueryValue}&priceTo=${priceToQueryValue}`
+
+      if (isValidLegoQuery && priceFromQueryValue && priceToQueryValue) {
+        setIsFilterQuery(true)
+        setPriceRange([+priceFromQueryValue, +priceToQueryValue])
+        setIsPriceRangeChanged(true)
+        setLegoThemesFromQuery(legoQueryValue)
+
+        updateParamsAndFiltersFromQuery(() => {
+          updatePriceFromQuery(+priceFromQueryValue, +priceToQueryValue)
+          setLegoThemesFromQuery(legoQueryValue)
+        }, `${currentPage}${priceQuery}${legoQuery}`)
+        return
+      }
+
+      if (priceFromQueryValue && priceToQueryValue) {
+        updateParamsAndFiltersFromQuery(() => {
+          updatePriceFromQuery(+priceFromQueryValue, +priceToQueryValue)
+        }, `${currentPage}${priceQuery}`)
+      }
+
+      if (isValidLegoQuery) {
+        updateParamsAndFiltersFromQuery(() => {
+          setIsFilterQuery(true)
+          setLegoThemesFromQuery(legoQueryValue)
+        }, `${currentPage}${legoQuery}`)
+        return
+      }
+    } catch (error) {
+      toast.error((error as Error).message)
+    }
+  }
+
+  const updatePriceFromQuery = (priceFrom: number, priceTo: number) => {
+    setIsFilterQuery(true)
+    setPriceRange([+priceFrom, +priceTo])
+    setIsPriceRangeChanged(true)
+  }
+
+  const updateParamsAndFiltersFromQuery = async (
+    callback: VoidFunction,
+    path: string
+  ) => {
+    callback()
+
+    const data = await getLegoSetsFx(`/lego-sets?limit=20&offset=${path}`)
+
+    setFilteredLegoSets(data)
+  }
+
+  async function UpdateParamsAndFilters<T>(updatedParams: T, path: string) {
+    const params = router.query
+
+    delete params.lego
+    delete params.priceFrom
+    delete params.priceTo
+
+    router.push(
+      {
+        query: {
+          ...params,
+          ...updatedParams,
+        },
+      },
+      undefined,
+      { shallow: true }
+    )
+
+    const data = await getLegoSetsFx(`/lego-sets?limit=20&offset=${path}`)
+
+    setFilteredLegoSets(data)
+  }
 
   const applyFilters = async () => {
     setIsFilterQuery(true)
@@ -40,67 +136,37 @@ const CatalogFilters = ({
       const initialPage = currentPage > 0 ? 0 : currentPage
 
       if (legos.length && isPriceRangeChanged) {
-        router.push(
+        UpdateParamsAndFilters(
           {
-            query: {
-              ...router.query,
-              lego: encodedLegoQuery,
-              priceFrom,
-              priceTo,
-              offset: initialPage + 1,
-            },
+            lego: encodedLegoQuery,
+            priceFrom,
+            priceTo,
+            offset: initialPage + 1,
           },
-          undefined,
-          { shallow: true }
+          `${initialPage}${priceQuery}${legoQuery}`
         )
-
-        const data = await getLegoSetsFx(
-          `/lego-sets?limit=20&offset=${initialPage}${priceQuery}${legoQuery}`
-        )
-
-        setFilteredLegoSets(data)
         return
       }
 
       if (isPriceRangeChanged) {
-        router.push(
+        UpdateParamsAndFilters(
           {
-            query: {
-              ...router.query,
-              priceFrom,
-              priceTo,
-              offset: initialPage + 1,
-            },
+            priceFrom,
+            priceTo,
+            offset: initialPage + 1,
           },
-          undefined,
-          { shallow: true }
+          `${initialPage}${priceQuery}`
         )
-
-        const data = await getLegoSetsFx(
-          `/lego-sets?limit=20&offset=${initialPage}${priceQuery}`
-        )
-
-        setFilteredLegoSets(data)
       }
 
       if (legos.length) {
-        router.push(
+        UpdateParamsAndFilters(
           {
-            query: {
-              ...router.query,
-              lego: encodedLegoQuery,
-              offset: initialPage + 1,
-            },
+            lego: encodedLegoQuery,
+            offset: initialPage + 1,
           },
-          undefined,
-          { shallow: true }
+          `${initialPage}${legoQuery}`
         )
-
-        const data = await getLegoSetsFx(
-          `/lego-sets?limit=20&offset=${initialPage}${legoQuery}`
-        )
-
-        setFilteredLegoSets(data)
       }
     } catch (error) {
       toast.error((error as Error).message)

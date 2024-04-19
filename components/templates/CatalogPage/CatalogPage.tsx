@@ -108,6 +108,7 @@ const CatalogPage = ({ query }: { query: IQueryParams }) => {
   }
 
   const handlePageChange = async ({ selected }: { selected: number }) => {
+    setSpinner(true)
     try {
       const data = await getLegoSetsFx(`/lego-sets?limit=20&offset=0`)
 
@@ -146,7 +147,11 @@ const CatalogPage = ({ query }: { query: IQueryParams }) => {
 
       setCurrentPage(selected)
       setLegoSets(result)
-    } catch (error) {}
+    } catch (error) {
+      toast.error((error as Error).message)
+    } finally {
+      setTimeout(() => setSpinner(false), 1000)
+    }
   }
 
   const resetFilters = async () => {
@@ -195,7 +200,7 @@ const CatalogPage = ({ query }: { query: IQueryParams }) => {
             >
               Сбросить фильтр
             </button>
-            <FilterSelect />
+            <FilterSelect setSpinner={setSpinner} />
           </div>
         </div>
         <div className={styles.catalog__bottom}>
@@ -212,7 +217,7 @@ const CatalogPage = ({ query }: { query: IQueryParams }) => {
             />
             {spinner ? (
               <ul className={skeletonStyles.skeleton}>
-                {Array.from(new Array(8)).map((_, i) => (
+                {Array.from(new Array(20)).map((_, i) => (
                   <li
                     key={i}
                     className={`${skeletonStyles.skeleton__item} ${
