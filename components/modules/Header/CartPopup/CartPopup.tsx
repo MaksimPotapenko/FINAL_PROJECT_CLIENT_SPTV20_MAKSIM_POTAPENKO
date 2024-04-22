@@ -7,6 +7,7 @@ import { withClickOutside } from '@/utils/withClickOutside'
 import styles from '@/styles/cartPopup/index.module.scss'
 import ShoppingCartSvg from '@/components/elements/ShoppingCartSvg/ShoppingCartSvg'
 import {
+  $disableCart,
   $shoppingCart,
   $totalPrice,
   setShoppingCart,
@@ -25,6 +26,7 @@ const CartPopup = forwardRef<HTMLDivElement, IWrappedComponentProps>(
     const totalPrice = useStore($totalPrice)
     const mode = useStore($mode)
     const shoppingCart = useStore($shoppingCart)
+    const disableCart = useStore($disableCart)
     const darkModeClass = mode === 'dark' ? `${styles.dark_mode}` : ''
 
     const toggleCartDropDown = () => setOpen(!open)
@@ -54,20 +56,32 @@ const CartPopup = forwardRef<HTMLDivElement, IWrappedComponentProps>(
 
     return (
       <div className={styles.cart} ref={ref}>
-        <button
-          className={`${styles.cart__btn} ${darkModeClass}`}
-          onClick={toggleCartDropDown}
-        >
-          {!!shoppingCart.length && (
-            <span className={styles.cart__btn__count}>
-              {shoppingCart.length}
+        {disableCart ? (
+          <button
+            className={`${styles.cart__btn} ${darkModeClass}`}
+            style={{ cursor: 'auto' }}
+          >
+            <span className={styles.cart__svg}>
+              <ShoppingCartSvg />
             </span>
-          )}
-          <span className={styles.cart__svg}>
-            <ShoppingCartSvg />
-          </span>
-          <span className={styles.cart__text}>Корзина</span>
-        </button>
+            <span className={styles.cart__text}>Корзина</span>
+          </button>
+        ) : (
+          <button
+            className={`${styles.cart__btn} ${darkModeClass}`}
+            onClick={toggleCartDropDown}
+          >
+            {!!shoppingCart.length && (
+              <span className={styles.cart__btn__count}>
+                {shoppingCart.length}
+              </span>
+            )}
+            <span className={styles.cart__svg}>
+              <ShoppingCartSvg />
+            </span>
+            <span className={styles.cart__text}>Корзина</span>
+          </button>
+        )}
         <AnimatePresence>
           {open && (
             <motion.ul
