@@ -18,7 +18,7 @@ export interface IQueryParams {
   sets: string
   priceFrom: string
   priceTo: string
-  partId: string
+  setId: string
 }
 
 export interface IFilterCheckboxItem {
