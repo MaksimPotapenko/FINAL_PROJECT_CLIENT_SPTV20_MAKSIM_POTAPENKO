@@ -4,10 +4,31 @@ export interface IShoppingCartItem {
   price: number
   image: string
   in_stock: number
-  parts_manufacturer: string
-  boiler_manufacturer: string
+  theme: string
   count: number
   total_price: number
   userId: number
-  partId: number
+  setId: number
+}
+
+export interface IAddToCartFx {
+  url: string
+  username: string
+  setId: number
+}
+
+export interface IUpdateCartItemFx {
+  url: string
+  payload: {
+    total_price?: number
+    count?: number
+  }
+}
+
+export interface ICartItemCounterProps {
+  totalCount: number
+  setId: number
+  initialCount: number
+  increasePrice: VoidFunction
+  decreasePrice: VoidFunction
 }
