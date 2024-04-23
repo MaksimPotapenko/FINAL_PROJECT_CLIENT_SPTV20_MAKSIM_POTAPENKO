@@ -98,13 +98,11 @@ const DashboardPage = () => {
             О нас
           </h3>
           <p className={`${styles.dashboard__about__text} ${darkModeClass}`}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
+            Компания LegoLand предлагает Вам редкие наборы лего 99% запчастей
+            представленных на сайте постоянно поддерживаются в наличии на нашем
+            складе. Ассортимент интернет-магазина LegoLand включает в себя
+            наборы лего по таким вселенным как Star Wars, Indiana Jones,
+            Jurassic Park, City, Classic, Lord of the Rings и многие другие.
           </p>
         </div>
       </div>
