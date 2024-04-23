@@ -15,7 +15,7 @@ import {
   setLegoSetsByPopularity,
 } from '@/context/legoSets'
 import { $shoppingCart } from '@/context/shopping-cart'
-import { removeFromCartFx } from '@/app/api/shopping-cart'
+import { removeFromCartFx } from '@/app/api/shoppingCart'
 import { getLegoSetsFx } from '@/app/api/legoSets'
 import { formatPrice } from '@/utils/common'
 import { toast } from 'react-toastify'

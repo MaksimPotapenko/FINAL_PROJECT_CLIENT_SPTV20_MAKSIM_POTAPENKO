@@ -11,7 +11,7 @@ import CartHoverCheckedSvg from '@/components/elements/CartHoverCheckedSvg/CartH
 import CartHoverSvg from '@/components/elements/CartHoverSvg/CartHoverSvg'
 import { toggleCartItem } from '@/utils/shopping-cart'
 import { $user } from '@/context/user'
-import { removeFromCartFx } from '@/app/api/shopping-cart'
+import { removeFromCartFx } from '@/app/api/shoppingCart'
 
 const CatalogItem = ({ item }: { item: ILegoSet }) => {
   const user = useStore($user)

@@ -39,7 +39,6 @@ const ProfileDropDown = forwardRef<HTMLDivElement, IWrappedComponentProps>(
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0 }}
               className={`${styles.profile__dropdown} ${darkModeClass}`}
-              style={{ transformOrigin: 'right top' }}
             >
               <li className={styles.profile__dropdown__user}>
                 <span

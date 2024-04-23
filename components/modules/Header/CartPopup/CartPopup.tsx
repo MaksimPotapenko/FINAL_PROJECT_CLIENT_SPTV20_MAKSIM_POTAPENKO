@@ -15,7 +15,7 @@ import {
 } from '@/context/shopping-cart'
 import Link from 'next/link'
 import CartPopupItem from './CartPopupItem'
-import { getCartItemsFx } from '@/app/api/shopping-cart'
+import { getCartItemsFx } from '@/app/api/shoppingCart'
 import { toast } from 'react-toastify'
 import { $user } from '@/context/user'
 import { formatPrice } from '@/utils/common'

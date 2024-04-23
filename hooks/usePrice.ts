@@ -1,6 +1,6 @@
 import { useStore } from 'effector-react'
 import { useEffect, useState } from 'react'
-import { removeFromCartFx } from '@/app/api/shopping-cart'
+import { removeFromCartFx } from '@/app/api/shoppingCart'
 import { removeItemFromCart, updateTotalPrice } from '@/utils/shopping-cart'
 
 export const usePrice = (

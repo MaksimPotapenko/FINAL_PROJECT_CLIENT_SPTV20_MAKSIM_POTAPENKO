@@ -3,7 +3,7 @@ import {
   addToCartFx,
   removeFromCartFx,
   updateCartItemFx,
-} from '@/app/api/shopping-cart'
+} from '@/app/api/shoppingCart'
 import {
   removeShoppingCartItem,
   updateCartItemTotalPrice,
