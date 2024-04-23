@@ -50,7 +50,7 @@ const ShippingPayment = () => {
     <section className={styles.shipping_payment}>
       <div className="container">
         <h2 className={`${styles.shipping_payment__title} ${darkModeClass}`}>
-          Доставка и оплата
+          Order Shipping
         </h2>
         <div className={`${styles.shipping_payment__tabs} ${darkModeClass}`}>
           <ul className={styles.shipping_payment__tabs__controls}>
@@ -60,7 +60,7 @@ const ShippingPayment = () => {
               } ${darkModeClass}`}
             >
               <button className={darkModeClass} onClick={handleTab1}>
-                Как работает курьерская доставка?
+                How does shipping work?
               </button>
             </li>
             <li
@@ -69,7 +69,7 @@ const ShippingPayment = () => {
               } ${darkModeClass}`}
             >
               <button className={darkModeClass} onClick={handleTab2}>
-                Как получить товар из пункта самовывоза?
+                How to receive your parsel from post automat?
               </button>
             </li>
             <li
@@ -78,7 +78,7 @@ const ShippingPayment = () => {
               } ${darkModeClass}`}
             >
               <button className={darkModeClass} onClick={handleTab3}>
-                Какие способы оплаты?
+                Payment methods?
               </button>
             </li>
             <li
@@ -87,7 +87,7 @@ const ShippingPayment = () => {
               } ${darkModeClass}`}
             >
               <button className={darkModeClass} onClick={handleTab4}>
-                Как узнать статус заказанного товара?
+                How to get updates on parsel status?
               </button>
             </li>
           </ul>

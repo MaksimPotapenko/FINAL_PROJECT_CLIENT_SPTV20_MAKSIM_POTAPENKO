@@ -5,9 +5,9 @@ const MessageInput = ({ register, errors, darkModeClass }: IFeedbackInput) => (
   <label className={`${styles.feedback_form__form__label} ${darkModeClass}`}>
     <textarea
       className={`${styles.feedback_form__form__textarea} ${darkModeClass}`}
-      placeholder="Введите ваше сообщение (от 20 до 300 символов)"
+      placeholder="Enter your message (from 20 tp 300 symbols)"
       {...register('message', {
-        required: 'Введите сообщение!',
+        required: 'Enter message!',
         minLength: 20,
         maxLength: 300,
       })}
@@ -16,10 +16,10 @@ const MessageInput = ({ register, errors, darkModeClass }: IFeedbackInput) => (
       <span className={styles.error_alert}>{errors.message?.message}</span>
     )}
     {errors.message && errors.message.type === 'minLength' && (
-      <span className={styles.error_alert}>Минимум 20 символов!</span>
+      <span className={styles.error_alert}>Min 20 symbols!</span>
     )}
     {errors.message && errors.message.type === 'maxLength' && (
-      <span className={styles.error_alert}>Не более 300 символов!</span>
+      <span className={styles.error_alert}>Max 300 symbols!</span>
     )}
   </label>
 )

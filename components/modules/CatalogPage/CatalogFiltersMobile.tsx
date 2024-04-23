@@ -51,8 +51,8 @@ const CatalogFiltersMobile = ({
     >
       <div className={`${styles.catalog__bottom__filters__inner}`}>
         <FiltersPopupTop
-          resetBtnText="Сбросить все"
-          title="Фильтры"
+          resetBtnText="Reset all"
+          title="Filters"
           resetFilters={resetFilters}
           resetFilterBtnDisabled={resetFilterBtnDisabled}
           closePopup={closePopup}
@@ -62,10 +62,10 @@ const CatalogFiltersMobile = ({
             className={`${styles.filters__theme__btn} ${darkModeClass}`}
             onClick={handleOpenLegos}
           >
-            Темы наборов
+            Lego themes
           </button>
           <FiltersPopup
-            title="Темы наборов"
+            title="Lego themes"
             resetFilterBtnDisabled={!isAnyLegoThemeChecked}
             updateTheme={updateLegoSetsThemes}
             setTheme={setLegoSetsThemes}
@@ -79,7 +79,7 @@ const CatalogFiltersMobile = ({
       </div>
       <div className={styles.filters__price}>
         <Accordion
-          title="Цена"
+          title="Price"
           titleClass={`${styles.filters__theme__btn} ${darkModeClass}`}
           hideArrowClass={styles.hide_arrow}
           isMobileForFilters={isMobile}
@@ -106,7 +106,7 @@ const CatalogFiltersMobile = ({
               style={{ top: 6, left: '47%' }}
             />
           ) : (
-            'Показать'
+            'Show'
           )}
         </button>
       </div>

@@ -5,21 +5,34 @@ import useRedirectByUserCheck from '@/hooks/useRedirectByUserCheck'
 import { IQueryParams } from '@/types/catalog'
 import { useStore } from 'effector-react'
 import Head from 'next/head'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import { useRouter } from 'next/router'
 import SetPage from '@/components/templates/SetPage/SetPage'
 import Custom404 from '../404'
+import Breadcrumbs from '@/components/modules/Breadcrumbs/Breadcrumbs'
 
 function CatalogSetPage({ query }: { query: IQueryParams }) {
   const { shouldLoadContent } = useRedirectByUserCheck()
   const legoSet = useStore($legoSet)
   const [error, setError] = useState(false)
   const router = useRouter()
+  const getDefaultTextGenerator = useCallback(
+    (subpath: string) => subpath.replace('catalog', 'Catalog'),
+    []
+  )
+  const getTextGenerator = useCallback((param: string) => ({})[param], [])
+  const lastCrumb = document.querySelector('.last-crumb') as HTMLElement
 
   useEffect(() => {
     loadLegoSet()
   }, [router.asPath])
+
+  useEffect(() => {
+    if (lastCrumb) {
+      lastCrumb.textContent = legoSet.name
+    }
+  }, [lastCrumb, legoSet])
 
   const loadLegoSet = async () => {
     try {
@@ -51,6 +64,10 @@ function CatalogSetPage({ query }: { query: IQueryParams }) {
         shouldLoadContent && (
           <Layout>
             <main>
+              <Breadcrumbs
+                getDefaultTextGenerator={getDefaultTextGenerator}
+                getTextGenerator={getTextGenerator}
+              />
               <SetPage />
               <div className="overlay" />
             </main>

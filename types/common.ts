@@ -30,4 +30,11 @@ export interface IGeolocation {
   longitude: number
 }
 
+export interface ICrumbProps {
+  text: string
+  textGenerator: () => string
+  href: string
+  last: boolean
+}
+
 export type SelectOptionType = MultiValue<IOption> | SingleValue<IOption> | null

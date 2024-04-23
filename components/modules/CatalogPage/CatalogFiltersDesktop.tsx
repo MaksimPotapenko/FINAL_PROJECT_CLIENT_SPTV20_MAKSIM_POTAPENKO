@@ -30,19 +30,19 @@ const CatalogFiltersDesktop = ({
       <h3
         className={`${styles.catalog__bottom__filters__title} ${darkModeClass}`}
       >
-        Фильтры
+        Filters
       </h3>
       <div className={styles.filters__boiler_theme}>
         <FilterThemeAccordion
           themesList={legoThemes}
-          title="Темы наборов:"
+          title="Lego themes:"
           updateTheme={updateLegoSetsThemes}
           setTheme={setLegoSetsThemes}
         />
       </div>
       <div className={styles.filters_price}>
         <Accordion
-          title="Цена"
+          title="Price"
           titleClass={`${styles.filters__theme__btn} ${darkModeClass}`}
           arrowOpenClass={styles.open}
         >
@@ -68,7 +68,7 @@ const CatalogFiltersDesktop = ({
               style={{ top: 6, left: '47%' }}
             />
           ) : (
-            'Показать'
+            'Show'
           )}
         </button>
         <button
@@ -76,7 +76,7 @@ const CatalogFiltersDesktop = ({
           disabled={resetFilterBtnDisabled}
           onClick={resetFilters}
         >
-          Сбросить
+          Reset
         </button>
       </div>
     </div>

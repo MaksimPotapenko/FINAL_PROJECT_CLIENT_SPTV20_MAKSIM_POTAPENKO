@@ -42,7 +42,7 @@ const HeaderTop = () => {
                   className={`${styles.header__nav__list__item__link} ${darkModeClass}`}
                   onClick={closePopup}
                 >
-                  Доставка и оплата
+                  Order Shipping
                 </a>
               </Link>
             </li>
@@ -52,7 +52,7 @@ const HeaderTop = () => {
                   className={`${styles.header__nav__list__item__link} ${darkModeClass}`}
                   onClick={closePopup}
                 >
-                  О компании
+                  About us
                 </a>
               </Link>
             </li>
@@ -62,7 +62,7 @@ const HeaderTop = () => {
                   className={`${styles.header__nav__list__item__link} ${darkModeClass}`}
                   onClick={closePopup}
                 >
-                  Каталог
+                  Catalog
                 </a>
               </Link>
             </li>
@@ -72,7 +72,7 @@ const HeaderTop = () => {
                   className={`${styles.header__nav__list__item__link} ${darkModeClass}`}
                   onClick={closePopup}
                 >
-                  Контакты
+                  Contacts
                 </a>
               </Link>
             </li>

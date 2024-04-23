@@ -67,16 +67,16 @@ const SetPage = () => {
               <span className={styles.set__info__stock}>
                 {legoSet.in_stock > 0 ? (
                   <span className={styles.set__info__stock__success}>
-                    Есть на складе
+                    In stock
                   </span>
                 ) : (
                   <span className={styles.set__info__stock__not}>
-                    Нет на складе
+                    Out of stock
                   </span>
                 )}
               </span>
               <span className={styles.set__info__code}>
-                Артикул: {legoSet.vendor_code}
+                Vendor Code: {legoSet.vendor_code}
               </span>
               <button
                 className={`${styles.set__info__btn} ${
@@ -95,9 +95,9 @@ const SetPage = () => {
                       {isInCart ? <CartHoverCheckedSvg /> : <CartHoverSvg />}
                     </span>
                     {isInCart ? (
-                      <span>Добавлено в карзину</span>
+                      <span>Added to cart</span>
                     ) : (
-                      <span>Положить в корзину</span>
+                      <span>Add to cart</span>
                     )}
                   </>
                 )}
@@ -109,7 +109,7 @@ const SetPage = () => {
         {isMobile && (
           <div className={styles.set__accordion}>
             <div className={styles.set__accordion__inner}>
-              <SetAccordion title="Описание">
+              <SetAccordion title="Description">
                 <div
                   className={`${styles.set__accordion__content} ${darkModeClass}`}
                 >
@@ -130,7 +130,7 @@ const SetPage = () => {
         )}
         <div className={styles.set__bottom}>
           <h2 className={`${styles.set__title} ${darkModeClass}`}>
-            Вам понравится
+            You will also like:
           </h2>
           <DashboardSlider
             goToSetPage

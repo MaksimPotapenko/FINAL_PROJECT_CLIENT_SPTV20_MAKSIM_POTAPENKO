@@ -36,7 +36,7 @@ const HeaderBottom = () => {
               <span
                 className={`${styles.header__logo__link__text} ${darkModeClass}`}
               >
-                Наборы LEGO
+                LegoLand
               </span>
             </a>
           </Link>

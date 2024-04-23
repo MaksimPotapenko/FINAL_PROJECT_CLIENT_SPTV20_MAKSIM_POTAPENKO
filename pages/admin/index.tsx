@@ -50,37 +50,37 @@ const LegoSetForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <label className={styles.feedback_form__form__input}>Тема</label>
+      <label className={styles.feedback_form__form__input}>Theme</label>
       <input
         className={styles.feedback_form__form__input}
         {...register('theme')}
       />
 
-      <label className={styles.feedback_form__form__input}>Цена</label>
+      <label className={styles.feedback_form__form__input}>Price</label>
       <input
         className={styles.feedback_form__form__input}
         {...register('price', { valueAsNumber: true })}
       />
 
-      <label className={styles.feedback_form__form__input}>Название</label>
+      <label className={styles.feedback_form__form__input}>Name</label>
       <input
         className={styles.feedback_form__form__input}
         {...register('name')}
       />
 
-      <label className={styles.feedback_form__form__input}>Описание</label>
+      <label className={styles.feedback_form__form__input}>Description</label>
       <textarea
         className={styles.feedback_form__form__input}
         {...register('description')}
       />
 
-      <label className={styles.feedback_form__form__input}>Изображения</label>
+      <label className={styles.feedback_form__form__input}>Images</label>
       <input
         className={styles.feedback_form__form__input}
         {...register('images')}
       />
 
-      <label className={styles.feedback_form__form__input}>В наличии</label>
+      <label className={styles.feedback_form__form__input}>In stock</label>
       <input
         className={styles.feedback_form__form__input}
         {...register('in_stock', { valueAsNumber: true })}

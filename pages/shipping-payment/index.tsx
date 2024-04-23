@@ -1,12 +1,17 @@
 import Head from 'next/head'
 import Layout from '@/components/layout/Layout'
 import ShippingPayment from '@/components/templates/ShippingPayment/ShippingPayment'
+import Breadcrumbs from '@/components/modules/Breadcrumbs/Breadcrumbs'
+import { useCallback } from 'react'
 
 function ShippingPaymentPage() {
+  const getDefaultTextGenerator = useCallback(() => 'Order Shipping', [])
+  const getTextGenerator = useCallback((param: string) => ({})[param], [])
+
   return (
     <>
       <Head>
-        <title>LegoLand | Доставка и оплата</title>
+        <title>LegoLand | Order Shipping</title>
         <meta charSet="UTF-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -14,6 +19,10 @@ function ShippingPaymentPage() {
       </Head>
       <Layout>
         <main>
+          <Breadcrumbs
+            getDefaultTextGenerator={getDefaultTextGenerator}
+            getTextGenerator={getTextGenerator}
+          />
           <ShippingPayment />
           <div className="overlay" />
         </main>

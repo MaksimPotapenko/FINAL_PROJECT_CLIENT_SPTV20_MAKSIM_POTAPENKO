@@ -44,7 +44,7 @@ const OrderAccordion = ({
               <DoneSvg />
             </span>
           )}
-          Корзина
+          Cart
         </h3>
         <button
           className={styles.order__cart__title__btn}
@@ -53,7 +53,7 @@ const OrderAccordion = ({
           <span>
             <EditSvg />
           </span>
-          {isMedia550 ? '' : 'Редактировать'}
+          {isMedia550 ? '' : 'Edit order'}
         </button>
       </motion.div>
       <AnimatePresence initial={false}>
@@ -85,7 +85,7 @@ const OrderAccordion = ({
                     <span
                       className={`${styles.order__cart__empty__text} ${darkModeClass}`}
                     >
-                      Корзина пуста
+                      Cart is empty
                     </span>
                   </li>
                 )}
@@ -95,7 +95,7 @@ const OrderAccordion = ({
                   <span
                     className={`${styles.order__cart__footer__text} ${darkModeClass}`}
                   >
-                    Общая сумма заказа:
+                    Total price:
                   </span>
                   <span className={styles.order__cart__footer__price}>
                     {formatPrice(totalPrice)} €
@@ -106,7 +106,7 @@ const OrderAccordion = ({
                   onClick={closeAccordion}
                   disabled={!shoppingCart.length}
                 >
-                  Продолжить
+                  Continue
                 </button>
               </div>
             </div>

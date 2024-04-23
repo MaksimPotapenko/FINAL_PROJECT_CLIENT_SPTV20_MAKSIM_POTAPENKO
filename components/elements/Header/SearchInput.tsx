@@ -96,7 +96,7 @@ const SearchInput = () => {
     })
 
     if (!set.id) {
-      toast.warning('Товар не найден.')
+      toast.warning('Item is not found.')
       return
     }
 
@@ -147,7 +147,7 @@ const SearchInput = () => {
           components={{
             NoOptionsMessage: spinner ? NoOptionsSpinner : NoOptionsMessage,
           }}
-          placeholder="Я ищу..."
+          placeholder="I am searching for..."
           value={searchOption}
           onChange={handleSearchOptionChange}
           styles={{

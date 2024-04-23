@@ -39,7 +39,7 @@ const OrderItem = ({ item }: { item: IShoppingCartItem }) => {
         {isMedia1160 &&
           (item.in_stock === 0 ? (
             <span className={styles.order__cart__list__item__empty}>
-              Нет на складе
+              Out of stock
             </span>
           ) : (
             <CartItemCounter
@@ -55,7 +55,7 @@ const OrderItem = ({ item }: { item: IShoppingCartItem }) => {
         {!isMedia1160 &&
           (item.in_stock === 0 ? (
             <span className={styles.order__cart__list__item__empty}>
-              Нет на складе
+              Out of stock
             </span>
           ) : (
             <CartItemCounter
@@ -81,7 +81,7 @@ const OrderItem = ({ item }: { item: IShoppingCartItem }) => {
               style={{ top: '-13px', left: '-30px', width: 25, height: 25 }}
             />
           ) : (
-            'Удалить'
+            'Delete'
           )}
         </button>
       </div>

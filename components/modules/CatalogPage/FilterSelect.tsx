@@ -34,19 +34,19 @@ const FilterSelect = ({
     if (legoSets.rows) {
       switch (router.query.first) {
         case 'cheap':
-          updateCategoryOption('Сначала дешевые')
+          updateCategoryOption('Cheap first')
           setLegoSetsCheapFirst()
           break
         case 'expensive':
-          updateCategoryOption('Сначала дорогие')
+          updateCategoryOption('Expensive first')
           setLegoSetsExpensiveFirst()
           break
         case 'popular':
-          updateCategoryOption('По популярности')
+          updateCategoryOption('Popular first')
           setLegoSetsByPopularity()
           break
         default:
-          updateCategoryOption('Сначала дешевые')
+          updateCategoryOption('Cheap first')
           setLegoSetsCheapFirst()
           break
       }
@@ -73,15 +73,15 @@ const FilterSelect = ({
     setCategoryOption(selectedOption)
 
     switch ((selectedOption as IOption).value) {
-      case 'Сначала дешевые':
+      case 'Cheap first':
         setLegoSetsCheapFirst()
         updateRoteParam('cheap')
         break
-      case 'Сначала дорогие':
+      case 'Expensive first':
         setLegoSetsExpensiveFirst()
         updateRoteParam('expensive')
         break
-      case 'По популярности':
+      case 'Popular first':
         setLegoSetsByPopularity()
         updateRoteParam('popular')
         break
@@ -92,8 +92,8 @@ const FilterSelect = ({
 
   return (
     <Select
-      placeholder="Я ищу..."
-      value={categoryOption || createSelectOption('Сначала дешевые')}
+      placeholder="I am searching for..."
+      value={categoryOption || createSelectOption('Cheap first')}
       onChange={handleSortOptionChange}
       styles={{
         ...selectStyles,

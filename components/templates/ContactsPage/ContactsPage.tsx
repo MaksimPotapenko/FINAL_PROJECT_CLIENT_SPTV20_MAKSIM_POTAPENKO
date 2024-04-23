@@ -14,7 +14,7 @@ const ContactsPage = ({ isWholesaleBuyersPage = false }) => {
     <section className={styles.contacts}>
       <div className="container">
         <h2 className={`${styles.contacts__title} ${darkModeClass}`}>
-          {isWholesaleBuyersPage ? 'Оптовым покупателям' : 'Контакты'}
+          {isWholesaleBuyersPage ? 'Оптовым покупателям' : 'Contacts'}
         </h2>
         <div className={styles.contacts__inner}>
           {isWholesaleBuyersPage ? (
@@ -36,28 +36,28 @@ const ContactsPage = ({ isWholesaleBuyersPage = false }) => {
                 <h3 className={darkModeClass}>LegoLand</h3>
               </li>
               <li className={`${styles.contacts__list__item} ${darkModeClass}`}>
-                <span>Офис:</span>
-                <span> г. Нарва, ул. ... д....</span>
+                <span>Office:</span>
+                <span> c. Narva, st. ... h. ....</span>
               </li>
               <li className={`${styles.contacts__list__item} ${darkModeClass}`}>
-                <span>Склад:</span>
-                <span> г. Нарва, ул. ... д....</span>
+                <span>Warehouse:</span>
+                <span> c. Narva, st. ... h. ....</span>
               </li>
               <li className={`${styles.contacts__list__item} ${darkModeClass}`}>
-                <span>График работы офиса:</span>
-                <span> пн-пс: с 8:00 до 22:00</span>
+                <span>Work schedule:</span>
+                <span> Mon-Fr: from 8:00 till 22:00</span>
               </li>
               <li className={`${styles.contacts__list__item} ${darkModeClass}`}>
-                <span>Наш контактный телефон:</span>
+                <span>Our phone number:</span>
                 <span> +372 5555-5555</span>
               </li>
               <li className={`${styles.contacts__list__item} ${darkModeClass}`}>
-                <span>Время приемок завок:</span>
-                <span> Пн-Вс: с 8:00 до 22:00</span>
+                <span>Application acceptance time:</span>
+                <span> Mon-Sun: from 8:00 till 22:00</span>
               </li>
               <li className={`${styles.contacts__list__item} ${darkModeClass}`}>
-                <span>Прием заказов электронным способом на сайте:</span>
-                <span> круглосуточно</span>
+                <span>Accepting orders on the website:</span>
+                <span> 24 hours</span>
               </li>
               <li className={`${styles.contacts__list__item} ${darkModeClass}`}>
                 <span>E-mail:</span>

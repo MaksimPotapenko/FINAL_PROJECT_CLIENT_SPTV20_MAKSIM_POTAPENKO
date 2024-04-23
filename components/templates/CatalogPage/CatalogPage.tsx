@@ -186,14 +186,12 @@ const CatalogPage = ({ query }: { query: IQueryParams }) => {
   return (
     <section className={styles.catalog}>
       <div className={`container ${styles.catalog__container}`}>
-        <h2 className={`${styles.catalog__title} ${darkModeClass}`}>
-          Каталог товаров
-        </h2>
+        <h2 className={`${styles.catalog__title} ${darkModeClass}`}>Catalog</h2>
         <div className={`${styles.catalog__top} ${darkModeClass}`}>
           <AnimatePresence>
             {isAnyLegoThemeChecked && (
               <ThemesBlock
-                title="Темы наборов:"
+                title="Lego themes:"
                 event={updateLegoSetsThemes}
                 themesList={legoThemes}
               />
@@ -205,7 +203,7 @@ const CatalogPage = ({ query }: { query: IQueryParams }) => {
               disabled={resetFilterBtnDisabled}
               onClick={resetFilters}
             >
-              Сбросить фильтр
+              Reset filter
             </button>
             <button
               className={styles.catalog__top__mobile_btn}
@@ -215,7 +213,7 @@ const CatalogPage = ({ query }: { query: IQueryParams }) => {
                 <FilterSvg />
               </span>
               <span className={styles.catalog__top__mobile_btn__text}>
-                Фильтр
+                Filter
               </span>
             </button>
             <FilterSelect setSpinner={setSpinner} />
@@ -255,7 +253,7 @@ const CatalogPage = ({ query }: { query: IQueryParams }) => {
                     <CatalogItem item={item} key={item.id} />
                   ))
                 ) : (
-                  <span>Список товаров пуст...</span>
+                  <span>Item list is empty...</span>
                 )}
               </ul>
             )}

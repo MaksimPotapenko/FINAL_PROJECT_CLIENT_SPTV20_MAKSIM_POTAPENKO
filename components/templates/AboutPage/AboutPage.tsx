@@ -10,20 +10,18 @@ const AboutPage = () => {
   return (
     <section className={styles.about}>
       <div className="container">
-        <h2 className={`${styles.about__title} ${darkModeClass}`}>
-          О компании
-        </h2>
+        <h2 className={`${styles.about__title} ${darkModeClass}`}>About us</h2>
         <div className={styles.about__inner}>
           <div className={`${styles.about__info} ${darkModeClass}`}>
             <p>
-              Компания &quot;LegoLand&quot; предлагает Вам редкие наборы лего
-              99% запчастей представленных на сайте постоянно поддерживаются в
-              наличии на нашем складе.
+              &quot;LegoLand&quot; offers you rare Lego sets. 99% of the spare
+              parts presented on the site are constantly maintained in stock in
+              our warehouse.
             </p>
             <p>
-              Ассортимент интернет-магазина &quot;LegoLand&quot; включает в себя
-              наборы лего по таким вселенным как Star Wars, Indiana Jones,
-              Jurassic Park, City, Classic, Lord of the Rings и многие другие.
+              The &quot;LegoLand&quot; Web-Store assortment includes Lego sets
+              from such universes as Star Wars, Indiana Jones, Jurassic Park,
+              City, Classic, Lord of the Rings and many others.
             </p>
           </div>
           <div className={`${styles.about__img} ${styles.about__img__top}`}>

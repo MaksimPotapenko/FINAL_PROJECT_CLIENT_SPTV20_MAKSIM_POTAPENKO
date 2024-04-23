@@ -10,7 +10,7 @@ const NameInput = ({ register, errors }: IAuthPageInput) => (
         maxLength: 15,
         pattern: {
           value: /^[а-яА-Яa-zA-ZёЁ]*$/,
-          message: 'Недопустимое значение!',
+          message: 'Invalid value!',
         },
       })}
       className={styles.form__input}

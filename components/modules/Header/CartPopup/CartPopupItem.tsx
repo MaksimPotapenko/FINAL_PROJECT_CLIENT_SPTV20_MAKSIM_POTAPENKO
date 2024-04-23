@@ -49,7 +49,7 @@ const CartPopupItem = ({ item }: { item: IShoppingCartItem }) => {
       <div className={styles.cart__popup__list__item__bottom}>
         {item.in_stock === 0 ? (
           <span className={styles.cart__popup__list__item__empty}>
-            Нет на складе
+            Out of stock
           </span>
         ) : (
           <CartItemCounter

@@ -43,9 +43,9 @@ const OrderPage = () => {
       const data = await makePaymentFx({
         url: '/payment',
         amount: totalPrice,
-        description: `Заказ №1 ${
+        description: `Order № ${
           userCity.city.length
-            ? `Город: ${userCity.city}, улица: ${userCity.street}`
+            ? `City: ${userCity.city}, street: ${userCity.street}`
             : ''
         }`,
       })
@@ -86,7 +86,7 @@ const OrderPage = () => {
     <section className={styles.order}>
       <div className="container">
         <h2 className={`${styles.order__title} ${darkModeClass}`}>
-          Оформление заказа
+          Finishing order
         </h2>
         <div className={styles.order__inner}>
           <div className={styles.order__cart}>
@@ -97,12 +97,12 @@ const OrderPage = () => {
           </div>
           <div className={styles.order__pay}>
             <h3 className={`${styles.order__pay__title} ${darkModeClass}`}>
-              Итого
+              Total
             </h3>
             <div className={`${styles.order__pay__inner} ${darkModeClass}`}>
               <div className={styles.order__pay__goods}>
                 <span>
-                  Товары (
+                  Items (
                   {shoppingCart.reduce(
                     (defaultCount, item) => defaultCount + item.count,
                     0
@@ -112,7 +112,7 @@ const OrderPage = () => {
                 <span>{formatPrice(totalPrice)} €</span>
               </div>
               <div className={styles.order__pay__total}>
-                <span>На сумму</span>
+                <span>Total price</span>
                 <span className={darkModeClass}>
                   {formatPrice(totalPrice)} €
                 </span>
@@ -128,7 +128,7 @@ const OrderPage = () => {
                     style={{ top: '6px', left: '47%' }}
                   />
                 ) : (
-                  'Подтвердить заказ'
+                  'ПConfirm order'
                 )}
               </button>
               <label
@@ -141,8 +141,7 @@ const OrderPage = () => {
                   checked={agreement}
                 />
                 <span className={styles.order__pay__rights__text}>
-                  <strong>Согласен с условиями</strong> Правил пользования
-                  торговой площадкой и правилами возврата
+                  <strong>I agree with</strong> Terms of use and return rules
                 </span>
               </label>
             </div>

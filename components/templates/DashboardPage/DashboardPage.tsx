@@ -77,17 +77,17 @@ const DashboardPage = () => {
           <BrandsSlider />
         </div>
         <h2 className={`${styles.dashboard__title} ${darkModeClass}`}>
-          Наборы LEGO
+          LEGO Sets
         </h2>
         <div className={styles.dashboard__parts}>
           <h3 className={`${styles.dashboard__parts__title} ${darkModeClass}`}>
-            Хиты продаж
+            Bestsellers
           </h3>
           <DashboardSlider items={bestsellers.rows || []} spinner={spinner} />
         </div>
         <div className={styles.dashboard__parts}>
           <h3 className={`${styles.dashboard__parts__title} ${darkModeClass}`}>
-            Новинки
+            New
           </h3>
           <DashboardSlider items={newSets.rows || []} spinner={spinner} />
         </div>
@@ -95,14 +95,14 @@ const DashboardPage = () => {
           <h3
             className={`${styles.dashboard__parts__title} ${styles.dashboard__about__title} ${darkModeClass}`}
           >
-            О нас
+            About us
           </h3>
           <p className={`${styles.dashboard__about__text} ${darkModeClass}`}>
-            Компания LegoLand предлагает Вам редкие наборы лего 99% запчастей
-            представленных на сайте постоянно поддерживаются в наличии на нашем
-            складе. Ассортимент интернет-магазина LegoLand включает в себя
-            наборы лего по таким вселенным как Star Wars, Indiana Jones,
-            Jurassic Park, City, Classic, Lord of the Rings и многие другие.
+            LegoLand offers you rare Lego sets with 99% of the parts constantly
+            maintained in stock at our warehouse as presented on the website.
+            The assortment of the LegoLand online store includes Lego sets from
+            universes such as Star Wars, Indiana Jones, Jurassic Park, City,
+            Classic, Lord of the Rings, and many others.
           </p>
         </div>
       </div>

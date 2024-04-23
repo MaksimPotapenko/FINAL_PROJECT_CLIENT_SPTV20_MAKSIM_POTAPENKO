@@ -23,7 +23,7 @@ const SetTabs = () => {
           className={showDescription ? styles.active : ''}
           onClick={handleShowDescription}
         >
-          Описание
+          Description
         </button>
       </div>
       {showDescription && (

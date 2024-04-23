@@ -23,15 +23,13 @@ const Footer = () => {
             <div className={styles.footer__top__item}>
               {!isMedia500 && (
                 <>
-                  <h3 className={styles.footer__top__item__title}>
-                    Интернет-магазин
-                  </h3>
+                  <h3 className={styles.footer__top__item__title}>Web-Store</h3>
                   <OnlineStoreContent />
                 </>
               )}
               {isMedia500 && (
                 <Accordion
-                  title="Интернет-магазин"
+                  title="Web-Store"
                   titleClass={styles.footer__top__item__title}
                   arrowOpenClass={styles.open}
                 >
@@ -43,13 +41,13 @@ const Footer = () => {
             <div className={styles.footer__top__item}>
               {!isMedia500 && (
                 <>
-                  <h3 className={styles.footer__top__item__title}>Компания</h3>
+                  <h3 className={styles.footer__top__item__title}>Company</h3>
                   <CompanyContent />
                 </>
               )}
               {isMedia500 && (
                 <Accordion
-                  title="Компания"
+                  title="Company"
                   titleClass={styles.footer__top__item__title}
                   arrowOpenClass={styles.open}
                 >
@@ -60,15 +58,15 @@ const Footer = () => {
             </div>
           </div>
           <div className={styles.footer__top__item}>
-            <h3 className={styles.footer__top__item__title}>Контакты</h3>
+            <h3 className={styles.footer__top__item__title}>Contacts</h3>
             <ul
               className={`${styles.footer__top__item__list} ${styles.footer__top__item__contacts}`}
             >
               <li className={styles.footer__top__item__list__item}>
                 <Link href="/contacts" passHref legacyBehavior>
                   <a className={styles.footer__top__item__list__item__link}>
-                    <span>Наш адрес:</span>
-                    <span>г. Нарва, ул. ... д....</span>
+                    <span>Our address</span>
+                    <span>c. Narva, st. ... h. ....</span>
                     <span>
                       <MarkerSvg />
                     </span>
@@ -80,7 +78,7 @@ const Footer = () => {
                   href="tel:+37255555555"
                   className={styles.footer__top__item__list__item__link}
                 >
-                  <span>Наш контактный телефон:</span>
+                  <span>Our phone number:</span>
                   <span>+372 5555-5555</span>
                   <span>
                     <PhoneSvg />
@@ -106,7 +104,7 @@ const Footer = () => {
           <div className={styles.footer__bottom__block}>
             <div className={styles.footer__bottom__block__left}>
               <h3 className={styles.footer__bottom__block__title}>
-                Мы принимаем к оплате:
+                We accept:
               </h3>
               <ul className={styles.footer__bottom__block__pay}>
                 <li className={styles.footer__bottom__block__pay__item}>
@@ -125,7 +123,7 @@ const Footer = () => {
             </div>
             <div className={styles.footer__bottom__block__right}>
               <h3 className={styles.footer__bottom__block__title}>
-                Мы в соцсетях:
+                Our social networks:
               </h3>
               <ul className={styles.footer__bottom__block__social}>
                 <li className={styles.footer__bottom__block__social__item}>
@@ -158,7 +156,7 @@ const Footer = () => {
           {isMedia750 && <FooterLogo />}
           <div className={styles.footer__bottom__block}>
             <p className={styles.footer__bottom__block__copyright}>
-              © «Наборы LEGO» 2024.
+              © «LegoLand» 2024.
             </p>
           </div>
         </div>
