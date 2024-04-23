@@ -25,4 +25,9 @@ export interface ILayoutProps {
   children: React.ReactNode
 }
 
+export interface IGeolocation {
+  latitude: number
+  longitude: number
+}
+
 export type SelectOptionType = MultiValue<IOption> | SingleValue<IOption> | null
