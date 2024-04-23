@@ -83,7 +83,7 @@ const Breadcrumbs = ({
               className={`${styles.breadcrumbs__item} ${darkModeClass}`}
             >
               {/**eslint-disable-next-line @typescript-eslint/ban-ts-comment
-               * @ts-ignore */}
+               * @ts-expect-error */}
               <Crumb
                 {...crumb}
                 key={idx}
