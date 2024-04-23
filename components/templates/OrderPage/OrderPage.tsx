@@ -128,7 +128,7 @@ const OrderPage = () => {
                     style={{ top: '6px', left: '47%' }}
                   />
                 ) : (
-                  'ПConfirm order'
+                  'Confirm order'
                 )}
               </button>
               <label

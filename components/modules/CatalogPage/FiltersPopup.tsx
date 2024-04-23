@@ -47,13 +47,13 @@ const FiltersPopup = ({
           onClick={applyFilters}
           style={{ marginBottom: 12 }}
         >
-          Показать
+          Show
         </button>
         <button
           className={styles.filters__actions__reset}
           onClick={handleClosePopup}
         >
-          Назад
+          Go back
         </button>
       </div>
     </div>

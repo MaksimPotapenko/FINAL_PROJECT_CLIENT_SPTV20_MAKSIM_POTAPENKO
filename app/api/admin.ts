@@ -28,7 +28,7 @@ export const createFx = createEffect(
       return
     }
 
-    toast.success('успешно!')
+    toast.success('success!')
 
     return data
   }

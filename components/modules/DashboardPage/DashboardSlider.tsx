@@ -90,7 +90,7 @@ const DashboardSlider = ({ items, spinner, goToSetPage }: IDashboardSlider) => {
           </div>
         ))
       ) : (
-        <span>Список товаров пуст....</span>
+        <span>Item list is empty....</span>
       )}
     </Slider>
   )

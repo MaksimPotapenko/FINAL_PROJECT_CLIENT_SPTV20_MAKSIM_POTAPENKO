@@ -13,23 +13,10 @@ const ContactsPage = ({ isWholesaleBuyersPage = false }) => {
   return (
     <section className={styles.contacts}>
       <div className="container">
-        <h2 className={`${styles.contacts__title} ${darkModeClass}`}>
-          {isWholesaleBuyersPage ? 'Оптовым покупателям' : 'Contacts'}
-        </h2>
+        <h2 className={`${styles.contacts__title} ${darkModeClass}`} />
         <div className={styles.contacts__inner}>
           {isWholesaleBuyersPage ? (
-            <div className={`${styles.contacts__list} ${darkModeClass}`}>
-              <p>
-                <span>
-                  Условия оптовых заказов решаются индивидуально по телефону:{' '}
-                </span>
-                <span>+372 5555-5555</span>
-              </p>
-              <p>
-                Либо опишите суть заказа в форме обртной связи и мы с вами
-                свяжемся.
-              </p>
-            </div>
+            <div className={`${styles.contacts__list} ${darkModeClass}`} />
           ) : (
             <ul className={`${styles.contacts__list} ${darkModeClass}`}>
               <li className={styles.contacts__list__title}>

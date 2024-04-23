@@ -78,7 +78,7 @@ const CatalogFilters = ({
       const err = error as Error
 
       if (err.message === 'URI malformed') {
-        toast.warning('Неправильный url для фильтров')
+        toast.warning('Invalid filter url')
         return
       }
 
