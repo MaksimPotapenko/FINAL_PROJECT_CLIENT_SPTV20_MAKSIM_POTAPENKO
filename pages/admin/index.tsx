@@ -1,94 +1,22 @@
-import { createFx } from '@/app/api/admin'
-import { IInputs } from '@/types/admin'
-import React, { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import styles from '@/styles/feedbackForm/index.module.scss'
-import { showAuthError } from '@/utils/errors'
+import Head from 'next/head'
+import AdminPage from '@/components/templates/AdminPage/AdminPage'
 
-type FormData = {
-  theme: string
-  price: number
-  name: string
-  description: string
-  images: string[]
-  in_stock: number
-}
-
-const LegoSetForm = () => {
-  const [, setSpinner] = useState(false)
-  const { register, handleSubmit } = useForm<FormData>()
-  const { resetField } = useForm<IInputs>()
-  const onSubmit = async (data: IInputs) => {
-    try {
-      setSpinner(true)
-      const userData = await createFx({
-        url: '/lego-sets/create',
-        theme: data.theme,
-        price: data.price,
-        name: data.name,
-        description: data.description,
-        images: data.images,
-        in_stock: data.in_stock,
-      })
-
-      if (!userData) {
-        return
-      }
-
-      resetField('theme')
-      resetField('price')
-      resetField('name')
-      resetField('description')
-      resetField('images')
-      resetField('in_stock')
-    } catch (error) {
-      showAuthError(error)
-    } finally {
-      setSpinner(false)
-    }
-  }
-
+function About() {
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <label className={styles.feedback_form__form__input}>Theme</label>
-      <input
-        className={styles.feedback_form__form__input}
-        {...register('theme')}
-      />
-
-      <label className={styles.feedback_form__form__input}>Price</label>
-      <input
-        className={styles.feedback_form__form__input}
-        {...register('price', { valueAsNumber: true })}
-      />
-
-      <label className={styles.feedback_form__form__input}>Name</label>
-      <input
-        className={styles.feedback_form__form__input}
-        {...register('name')}
-      />
-
-      <label className={styles.feedback_form__form__input}>Description</label>
-      <textarea
-        className={styles.feedback_form__form__input}
-        {...register('description')}
-      />
-
-      <label className={styles.feedback_form__form__input}>Images</label>
-      <input
-        className={styles.feedback_form__form__input}
-        {...register('images')}
-      />
-
-      <label className={styles.feedback_form__form__input}>In stock</label>
-      <input
-        className={styles.feedback_form__form__input}
-        {...register('in_stock', { valueAsNumber: true })}
-      />
-
-      <input className={styles.feedback_form__form__btn} type="submit" />
-    </form>
+    <>
+      <Head>
+        <title>LegoLand | Admin</title>
+        <meta charSet="UTF-8" />
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" type="image/svg" sizes="32x32" href="/img/logo.svg" />
+      </Head>
+      <main>
+        <AdminPage />
+        <div className="overlay" />
+      </main>
+    </>
   )
 }
 
-export default LegoSetForm
+export default About

@@ -1,0 +1,14 @@
+class AuthPage {
+  - isMedia800: boolean
+  - switchCtn: MutableRefObject<HTMLDivElement>
+  - switchC1: MutableRefObject<HTMLDivElement>
+  - switchC2: MutableRefObject<HTMLDivElement>
+  - switchCircle1: MutableRefObject<HTMLDivElement>
+  - switchCircle2: MutableRefObject<HTMLDivElement>
+  - aContainer: MutableRefObject<HTMLDivElement>
+  - bContainer: MutableRefObject<HTMLDivElement>
+  - mode: Mode
+  - darkModeClass: string
+  + AuthPage()
+  + switchForm(): void
+}

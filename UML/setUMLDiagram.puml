@@ -1,0 +1,31 @@
+package "Components" {
+  class SetImagesList
+  class DashboardSlider
+  class SetAccordion
+  class SetTabs
+  class CartHoverCheckedSvg
+  class CartHoverSvg
+}
+
+class SetPage {
+  - legoSet: LegoSet
+  - mode: Mode
+  - user: User
+  - isMobile: boolean
+  - legoSets: LegoSets
+  - cartItems: ShoppingCart[]
+  - darkModeClass: string
+  - isInCart: boolean
+  - spinnerToggleCart: boolean
+  - spinnerSlider: boolean
+  + SetPage()
+  + loadLegoSet(): void
+  + toggleToCart(): void
+}
+
+SetPage *--> SetImagesList
+SetPage *--> DashboardSlider
+SetPage *--> SetAccordion
+SetPage *--> SetTabs
+SetPage *--> CartHoverCheckedSvg
+SetPage *--> CartHoverSvg

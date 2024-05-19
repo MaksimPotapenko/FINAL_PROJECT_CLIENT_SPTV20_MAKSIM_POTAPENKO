@@ -1,0 +1,22 @@
+package "Components" {
+  class BrandsSlider
+  class CartAlert
+  class DashboardSlider
+}
+
+class DashboardPage {
+  - newSets: ILegoSets
+  - bestsellers: ILegoSets
+  - spinner: boolean
+  - showAlert: boolean
+  - shoppingCart: ShoppingCart[]
+  - mode: Mode
+  - darkModeClass: string
+  + DashboardPage()
+  + loadLegoSets(): void
+  + closeAlert(): void
+}
+
+DashboardPage *--> BrandsSlider
+DashboardPage *--> CartAlert
+DashboardPage *--> DashboardSlider

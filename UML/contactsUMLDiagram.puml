@@ -1,0 +1,14 @@
+package "Components" {
+  class MailSvg
+  class FeedbackForm
+}
+
+class ContactsPage {
+  - mode: Mode
+  - isMobile560: boolean
+  - darkModeClass: string
+  + ContactsPage({ isWholesaleBuyersPage: boolean })
+}
+
+ContactsPage *--> MailSvg
+ContactsPage *--> FeedbackForm

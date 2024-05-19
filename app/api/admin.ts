@@ -13,23 +13,40 @@ export const createFx = createEffect(
     images,
     in_stock,
   }: ICreateFx) => {
-    const { data } = await api.post(url, {
-      url,
-      theme,
-      price,
-      name,
-      description,
-      images,
-      in_stock,
-    })
+    try {
+      const { data } = await api.post(url, {
+        theme,
+        price,
+        name,
+        description,
+        images,
+        in_stock,
+      })
 
-    if (data.warningMessage) {
-      toast.warning(data.warningMessage)
-      return
+      if (data.warningMessage) {
+        toast.warning(data.warningMessage)
+        return null
+      }
+
+      toast.success('Success!')
+
+      return data
+    } catch (error) {
+      console.error('Error in createFx:', error)
+      toast.error('An error occurred while creating.')
+      throw error
     }
-
-    toast.success('success!')
-
-    return data
   }
 )
+
+export const deleteFx = createEffect(async (id: string) => {
+  try {
+    const { data } = await api.delete(`/lego-sets/delete/${id}`)
+    toast.success('Lego set deleted successfully!')
+    return data
+  } catch (error) {
+    console.error('Error in deleteFx:', error)
+    toast.error('An error occurred while deleting Lego set.')
+    throw error
+  }
+})

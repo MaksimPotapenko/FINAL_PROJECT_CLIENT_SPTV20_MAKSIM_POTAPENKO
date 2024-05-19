@@ -1,0 +1,62 @@
+package "Components" {
+  class FilterSelect
+  class ThemesBlock
+  class CatalogItem
+  class CatalogFilters
+}
+
+package "Context" {
+  class LegoSetsContext
+  class ModeContext
+}
+
+class CatalogPage {
+  - mode: Mode
+  - legoThemes: LegoTheme[]
+  - legoSets: LegoSet[]
+  - filteredLegoSets: LegoSet[]
+  - spinner: boolean
+  - priceRange: number[]
+  - isFilterInQuery: boolean
+  - isPriceRangeChanged: boolean
+  - currentPage: number
+  - darkModeClass: string
+  - router: Router
+  - isAnyLegoThemeChecked: boolean
+  - resetFilterBtnDisabled: boolean
+  + CatalogPage({ query: IQueryParams })
+  + loadLegoSets(): void
+  + resetPagination(data: ILegoSets): void
+  + handlePageChange({ selected }: { selected: number }): void
+  + resetFilters(): void
+}
+
+class PaymentService {
+  + makePayment(makePaymentDto: MakePaymentDto): Promise<any>
+  + checkPayment(checkPaymentDto: CheckPaymentDto): Promise<any>
+}
+
+class PaymentController {
+  - paymentService: PaymentService
+  + makePayment(makePaymentDto: MakePaymentDto): any
+  + checkPayment(checkPaymentDto: CheckPaymentDto): any
+}
+
+class MakePaymentDto {
+  - amount: number
+  - description?: string
+}
+
+class CheckPaymentDto {
+  - paymentId: number
+}
+
+CatalogPage ..> FilterSelect
+CatalogPage ..> ThemesBlock
+CatalogPage ..> CatalogItem
+CatalogPage ..> CatalogFilters
+CatalogPage *--> LegoSetsContext
+CatalogPage *--> ModeContext
+PaymentController *--> PaymentService
+PaymentService *--> MakePaymentDto
+PaymentService *--> CheckPaymentDto

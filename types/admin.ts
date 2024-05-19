@@ -16,3 +16,7 @@ export interface IInputs {
   images: string[]
   in_stock: number
 }
+
+export interface IDeleteFx {
+  id: string
+}

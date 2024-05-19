@@ -1,0 +1,21 @@
+package "Components" {
+  class OrderAccordion
+}
+
+class OrderPage {
+  - orderIsReady: boolean
+  - agreement: boolean
+  - spinner: boolean
+  - mode: Mode
+  - user: User
+  - userCity: UserCity
+  - shoppingCart: ShoppingCart[]
+  - totalPrice: number
+  + OrderPage()
+  + handleAgreementChange(): void
+  + makePay(): void
+  + checkPayment(paymentId: string): void
+  + resetCart(): void
+}
+
+OrderPage *--> OrderAccordion

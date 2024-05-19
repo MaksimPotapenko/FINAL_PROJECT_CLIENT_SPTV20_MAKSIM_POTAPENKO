@@ -1,0 +1,13 @@
+class ShippingPayment {
+  - tab1: boolean
+  - tab2: boolean
+  - tab3: boolean
+  - tab4: boolean
+  - mode: Mode
+  - darkModeClass: string
+  + ShippingPayment()
+  + handleTab1(): void
+  + handleTab2(): void
+  + handleTab3(): void
+  + handleTab4(): void
+}

@@ -5,7 +5,7 @@ const MessageInput = ({ register, errors, darkModeClass }: IFeedbackInput) => (
   <label className={`${styles.feedback_form__form__label} ${darkModeClass}`}>
     <textarea
       className={`${styles.feedback_form__form__textarea} ${darkModeClass}`}
-      placeholder="Enter your message (from 20 tp 300 symbols)"
+      placeholder="Enter your message (from 20 to 300 symbols)"
       {...register('message', {
         required: 'Enter message!',
         minLength: 20,
