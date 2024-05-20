@@ -31,7 +31,22 @@ const AdminPage = () => {
     in_stock: number
   }
 
-  const [activeTab, setActiveTab] = useState('create') // 'create' или 'delete'
+  const themes = [
+    'Star Wars',
+    'Batman',
+    'Harry Potter',
+    'Disney',
+    'Marvel',
+    'Lord of the Rings',
+    'Indiana Jones',
+    'Jurassic World',
+    'NINJAGO',
+    'Minecraft',
+    'Classic',
+    'City',
+  ]
+
+  const [activeTab, setActiveTab] = useState('create') // 'create' or 'delete'
   const [, setSpinner] = useState(false)
   const { register, handleSubmit, reset: resetForm } = useForm<FormData>()
   const {
@@ -69,7 +84,7 @@ const AdminPage = () => {
     try {
       setSpinner(true)
       await deleteFx(data.id)
-      // Дополнительная логика, например, обновление списка наборов после удаления
+      // Additional logic, e.g., updating the list of sets after deletion
       resetIdForm()
     } catch (error) {
       showAuthError(error)
@@ -84,13 +99,13 @@ const AdminPage = () => {
       <main className={styles.main}>
         <div className={styles.tabs}>
           <button
-            className={activeTab === 'create' ? styles.activeTab : ''}
+            className={`${styles.tab} ${activeTab === 'create' ? styles.activeTab : ''}`}
             onClick={() => setActiveTab('create')}
           >
             Create Set
           </button>
           <button
-            className={activeTab === 'delete' ? styles.activeTab : ''}
+            className={`${styles.tab} ${activeTab === 'delete' ? styles.activeTab : ''}`}
             onClick={() => setActiveTab('delete')}
           >
             Delete Set
@@ -100,7 +115,13 @@ const AdminPage = () => {
           <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
             <div className={styles.formGroup}>
               <label>Theme</label>
-              <input {...register('theme')} />
+              <select {...register('theme')}>
+                {themes.map((theme) => (
+                  <option key={theme} value={theme}>
+                    {theme}
+                  </option>
+                ))}
+              </select>
             </div>
 
             <div className={styles.formGroup}>
